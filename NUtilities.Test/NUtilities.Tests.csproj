@@ -66,6 +66,7 @@
       <DependentUpon>AttributeResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Attributes\LocalizedDescriptionAttributeTests.cs" />
+    <Compile Include="Helpers\EnumHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
