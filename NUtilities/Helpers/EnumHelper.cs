@@ -43,7 +43,7 @@
         /// The value that matches the description.
         /// </returns>
         /// <exception cref="InvalidOperationException">The specified type is not an <see cref="Enum"/>.</exception>
-        public static T GetValueFromDescriptio<T>(string description)
+        public static T GetValueFromDescription<T>(string description)
         {
             var type = typeof(T);
             if (!type.IsEnum)
@@ -54,19 +54,9 @@
             foreach (var field in type.GetFields())
             {
                 var attribute = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
-                if (attribute != null)
+                if ((attribute != null && attribute.Description.Equals(description)) || field.Name == description)
                 {
-                    if (attribute.Description == description)
-                    {
-                            return (T)field.GetValue(null);
-                    }
-                }
-                else
-                {
-                    if (field.Name == description)
-                    {
-                        return (T)field.GetValue(null);
-                    }
+                    return (T)field.GetValue(null);
                 }
             }
 

@@ -22,6 +22,22 @@
         }
 
         /// <summary>
+        /// Gets the description stored in this attribute.
+        /// </summary>
+        public override string Description
+        {
+            get
+            {
+                if (nameProperty == null)
+                {
+                    return base.Description;
+                }
+
+                return (string)nameProperty.GetValue(nameProperty.DeclaringType, null);
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the type of the resource.
         /// </summary>
         /// <value>
@@ -38,22 +54,6 @@
             {
                 resourceType = value;
                 nameProperty = resourceType.GetProperty(base.Description, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-            }
-        }
-
-        /// <summary>
-        /// Gets the description stored in this attribute.
-        /// </summary>
-        public override string Description
-        {
-            get
-            {
-                if (nameProperty == null)
-                {
-                    return base.Description;
-                }
-
-                return (string)nameProperty.GetValue(nameProperty.DeclaringType, null);
             }
         }
     }
