@@ -65,8 +65,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AttributeResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Attributes\EndianAttributeTests.cs" />
     <Compile Include="Attributes\LocalizedDescriptionAttributeTests.cs" />
     <Compile Include="Helpers\EnumHelperTests.cs" />
+    <Compile Include="Helpers\StructHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

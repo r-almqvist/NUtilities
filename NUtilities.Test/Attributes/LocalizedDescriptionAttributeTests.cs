@@ -20,9 +20,9 @@
         /// </summary>
         [TestCase]
         [LocalizedDescription("ValidDescription", ResourceType = typeof(AttributeResources))]
-        public void GetDescription_MatchesAttributeParameter()
+        public void LocalizedDescriptionAttribute_ForMethod_MatchesResourceString()
         {
-            StringAssert.IsMatch(AttributeResources.ValidDescription, GetCallersLocalizedDescription());
+            StringAssert.IsMatch(AttributeResources.ValidDescription, GetCallerDescription());
         }
 
         /// <summary>
@@ -36,15 +36,15 @@
         [TestCase("mk-MK", ExpectedResult = true)]
         [LocalizedDescription("ValidDescription", ResourceType = typeof(AttributeResources))]
         [SetUICulture("mn-MN")]
-        public bool GetDescription_UsesCurrentCulture(string cultureName)
+        public bool LocalizedDescriptionAttribute_OnCultureChange_MatchesCultureSpecificResource(string cultureName)
         {
             string originalResourceValue = AttributeResources.ValidDescription;
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
-            return originalResourceValue.Equals(GetCallersLocalizedDescription());
+            return originalResourceValue.Equals(GetCallerDescription());
         }
 
-        private string GetCallersLocalizedDescription()
+        private string GetCallerDescription()
         {
             var callerMethodName = new StackTrace().GetFrame(1).GetMethod().Name;
             var callerLocalizedDescriptionAttribute = (LocalizedDescriptionAttribute)GetType()
